@@ -27,3 +27,41 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+
+# Lock
+.terraform.lock.hcl
+*.terraform.tfstate.lock.info
+
+# Local Files
+Makefile
+*.backup
+
+# Terraform local vars
+*.safe.tf
+*.safe.tfvars
+*.safe.txt
+
+# Ansible local
+*.retry
+
+# OS Files
+# OS X
+*.DS_Store
+.DS_Store
+.DS_Store*
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux stuff you don't want
+.Trash*
+.thumbnails
