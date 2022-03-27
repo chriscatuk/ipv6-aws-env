@@ -37,7 +37,6 @@ Makefile
 *.backup
 
 # Terraform local vars
-terraform.tfvars
 *.safe.tf
 *.safe.tfvars
 *.safe.txt

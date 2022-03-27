@@ -1,3 +1,8 @@
+# ======================================
+#          Backend s3 is in 
+#  >>>>>>   backend.safe.tf   <<<<<<
+# ======================================
+
 terraform {
   required_version = ">=1.1"
   required_providers {
@@ -8,5 +13,19 @@ terraform {
   }
 }
 
-# Backend s3 is in backend.safe.tf
+provider "aws" {
+  region = var.regions.principal
 
+  default_tags {
+    tags = var.tags
+  }
+}
+
+provider "aws" {
+  region = var.regions.secondary
+  alias  = "secondary"
+
+  default_tags {
+    tags = var.tags
+  }
+}

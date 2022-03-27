@@ -1,0 +1,31 @@
+# Define your own sensitive values for the Variables in this file
+# Copy this file and remove .example to define the Variables
+
+# (optional) this suffix will be added to all resource names
+# default: ""
+name_suffix = "-suffix"
+
+# DNS Route 53 settings, can be from another account
+dns = {
+  route53_domain    = "domain.com"
+  route53_zoneID    = "ZZZZZZZZZZZZ"
+  dnsupdate_rolearn = "arn:aws:iam::111111111111:role/service-role/external-terraform-user-role"
+  dnsupdate_region  = "eu-west-2"
+}
+
+ssh = {
+  username   = "admin"
+  keypublic  = "ssh-ed25519 AAAAAAa.AAAAAA email@domain.com"
+  allowlists = true # if false, will allow SSH from all IPs
+}
+
+allowlists = {
+  ipv4 = [
+    "88.88.88.88/32", # Home
+    "82.82.82.82/32", # VPN
+  ]
+  ipv6 = [
+    "2001:0db8:8888:7777::/64", # Home
+    "2001:0db8:9999:8888::/64", # VPN
+  ]
+}
