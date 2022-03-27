@@ -15,7 +15,7 @@ module "dns_records" {
   count  = var.dns != null ? 1 : 0
   source = "./modules/dnsrecord"
   providers = {
-    aws.dnsupdate = aws.dnsupdate
+    aws = aws.dnsupdate
   }
 
   route53_zoneid = var.dns.route53_zoneid

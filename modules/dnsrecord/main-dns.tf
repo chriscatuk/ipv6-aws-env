@@ -4,7 +4,6 @@
 
 resource "aws_route53_record" "a_records" {
   for_each = { for record in var.a_records : record.name => record }
-  provider = aws.dnsupdate
   zone_id  = var.route53_zoneid
   name     = each.value.name
   type     = "A"
