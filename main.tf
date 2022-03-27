@@ -7,8 +7,8 @@ terraform {
   required_version = ">=1.1"
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.0"
+      source                = "hashicorp/aws"
+      version               = ">= 4.0"
     }
   }
 }
@@ -22,8 +22,8 @@ provider "aws" {
 }
 
 provider "aws" {
-  region = var.regions.secondary
   alias  = "secondary"
+  region = var.regions.secondary
 
   default_tags {
     tags = var.tags

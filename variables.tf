@@ -62,7 +62,7 @@ variable "dns" {
   description = "(optional) DNS Route 53 settings, can be from another account. Default; no DNS record will be created"
   type = object({
     route53_domain    = string # example "aws.domain.net"
-    route53_zoneID    = string # "ZZZZZZZZZZZZZ"
+    route53_zoneid    = string # "ZZZZZZZZZZZZZ"
     dnsupdate_rolearn = string # "arn:aws:iam::111111111111:role/service-role/external-terraform-user-role"
     dnsupdate_region  = string # "eu-west-2"
 

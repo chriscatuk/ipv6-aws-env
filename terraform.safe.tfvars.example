@@ -8,7 +8,7 @@ name_suffix = "-suffix"
 # DNS Route 53 settings, can be from another account
 dns = {
   route53_domain    = "domain.com"
-  route53_zoneID    = "ZZZZZZZZZZZZ"
+  route53_zoneid    = "ZZZZZZZZZZZZ"
   dnsupdate_rolearn = "arn:aws:iam::111111111111:role/service-role/external-terraform-user-role"
   dnsupdate_region  = "eu-west-2"
 }
