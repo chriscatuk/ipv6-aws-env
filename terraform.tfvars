@@ -23,10 +23,11 @@ deploy = {
 
 #Subnet of the VPC (will be divided in 3 Availability Zones)
 cidrs = {
-  eu-east-1 = "10.35.64.0/22"
-  us-east-1 = "10.35.128.0/22"
+  principal = "10.35.64.0/22"
+  secondary = "10.35.128.0/22"
 }
 
+number_of_az = 2
 tags = {
   deployment  = "terraform"
   environment = "dev"

@@ -46,7 +46,7 @@ module "dns_records" {
   }]
 }
 
-output "dns_records" {
-  #  sensitive = true
-  value = module.dns_records
-}
+# output "dns_records" {
+#   #  sensitive = true
+#   value = module.dns_records
+# }

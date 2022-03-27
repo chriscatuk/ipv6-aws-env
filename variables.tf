@@ -30,9 +30,15 @@ variable "regions" {
 variable "cidrs" {
   type = map(string)
   default = {
-    eu-east-1 = "10.35.64.0/22"
-    us-east-1 = "10.35.128.0/22"
+    principal = "10.35.64.0/22"
+    secondary = "10.35.128.0/22"
   }
+}
+
+#Subnet of the VPC (will be divided in 3 Availability Zones)
+variable "number_of_az" {
+  description = "Number of availability zones to use"
+  type        = number
 }
 
 variable "deploy" {
