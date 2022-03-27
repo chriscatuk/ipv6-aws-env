@@ -39,9 +39,7 @@ Makefile
 # Terraform local vars
 terraform.tfvars
 *.safe.tf
-!example.safe.tf
 *.safe.tfvars
-!example.safe.tfvars
 *.safe.txt
 
 # Ansible local
