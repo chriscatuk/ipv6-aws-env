@@ -10,10 +10,29 @@ variable "ttl" {
 }
 
 variable "a_records" {
-  description = "DNS Record to create in that domain"
+  description = "(Optional) DNS Records to create in that domain for IPv4"
   type = list(object({
     name    = string
     records = list(string)
   }))
-  default = null
+  default = []
+}
+
+
+variable "aaaa_records" {
+  description = "(Optional) DNS Records to create in that domain for IPv6"
+  type = list(object({
+    name    = string
+    records = list(string)
+  }))
+  default = []
+}
+
+variable "cname_records" {
+  description = "(Optional) DNS Records to create in that domain as CNAMES"
+  type = list(object({
+    name    = string
+    records = list(string)
+  }))
+  default = []
 }
