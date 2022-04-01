@@ -7,7 +7,7 @@ resource "aws_instance" "instance" {
   # key_name                    = aws_key_pair.key.key_name
   subnet_id                   = var.subnet_id
   associate_public_ip_address = var.public_ip
-  ipv6_address_count          = var.ipv6 != "" ? 1 : 0
+  ipv6_address_count          = var.ipv6 ? 1 : 0
   vpc_security_group_ids      = var.sg_ids
   tags = {
     Name = var.hostname
