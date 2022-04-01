@@ -29,3 +29,7 @@ provider "aws" {
     tags = var.tags
   }
 }
+
+locals {
+  fullname = "${var.name_prefix}${var.name_suffix}"
+}
