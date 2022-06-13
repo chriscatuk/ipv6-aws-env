@@ -17,7 +17,7 @@ regions = {
 }
 
 deploy = {
-  minikube = true
+  minikube = false
   bastion  = true
 }
 
