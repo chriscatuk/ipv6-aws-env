@@ -1,10 +1,10 @@
-module "ipv6only" {
+module "ipv6only_host" {
   source = "./modules/gp-instance"
 
   enabled = var.deploy.ipv6only_host
 
   subnet_id         = module.vpc.private_subnets_ipv6only[0].id
-  sg_ids            = [module.vpc.vpc.default_security_group_id, aws_security_group.ipv6only.id]
+  sg_ids            = [module.vpc.vpc.default_security_group_id, aws_security_group.ipv6only_host.id]
   hostname          = "${local.fullname}-ipv6only"
   route53_zoneID    = var.dns.route53_zoneid
   dnsupdate_rolearn = var.dns.dnsupdate_rolearn
@@ -27,7 +27,7 @@ module "ipv6only" {
 ########################
 #    SECURITY GROUP    #
 ########################
-resource "aws_security_group" "ipv6only" {
+resource "aws_security_group" "ipv6only_host" {
   vpc_id      = module.vpc.vpc.id
   name        = "${local.fullname}_ipv6only"
   description = "${local.fullname} ipv6only"
