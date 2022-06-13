@@ -17,8 +17,11 @@ regions = {
 }
 
 deploy = {
-  minikube = true
-  bastion  = true
+  minikube      = true
+  minikube6     = true
+  bastion       = true
+  ipv4only_host = false
+  ipv6only_host = false
 }
 
 #Subnet of the VPC (will be divided in 3 Availability Zones)
@@ -27,7 +30,7 @@ cidrs = {
   secondary = "10.35.128.0/22"
 }
 
-number_of_az = 3
+number_of_az = 2
 tags = {
   deployment  = "terraform"
   environment = "dev"

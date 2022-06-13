@@ -44,12 +44,18 @@ variable "number_of_az" {
 variable "deploy" {
   description = "Do we deploy those resources or not?"
   type = object({
-    minikube = bool
-    bastion  = bool
+    minikube      = bool
+    minikube6     = bool
+    bastion       = bool
+    ipv6only_host = bool
+    ipv4only_host = bool
   })
   default = {
-    minikube = true
-    bastion  = true
+    minikube      = false
+    minikube6     = false
+    bastion       = true
+    ipv6only_host = false
+    ipv4only_host = false
   }
 }
 

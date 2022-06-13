@@ -23,8 +23,6 @@ packages:
   - yum-cron
 
 runcmd:
-  -  #!/bin/bash -xe
-  - set -xe
   # Clone App repo 1/2: Settings
   - git_repo=https://github.com/chriscatuk/vpn-bastion.git
   - git_dir=/opt/github/vpn-bastion
@@ -32,7 +30,7 @@ runcmd:
   - docker_dir=$${git_dir}/docker-ipsec-vpn-server
   # Hostname
   - echo '127.0.0.1 ${hostname}' | sudo tee -a /etc/hosts
-  - [sed, -i, -e, "s/HOSTNAME=.*/HOSTNAME=${hostname}/", /etc/sysconfig/network]
+  - sudo hostnamectl set-hostname ${hostname}
   # Yum settings for security updates
   - yum -y update
   - systemctl enable yum-cron
@@ -45,7 +43,7 @@ runcmd:
   - systemctl start yum-cron
   # Docker
   - amazon-linux-extras install docker -y
-  - sudo curl -L https://github.com/docker/compose/releases/download/2.3.3/docker-compose-`uname -s`-`uname -m` -o /usr/bin/docker-compose
+  - sudo curl -L https://github.com/docker/compose/releases/download/2.6.0/docker-compose-`uname -s`-`uname -m` -o /usr/bin/docker-compose
   - sudo chmod +x /usr/bin/docker-compose
   - systemctl enable docker
   - systemctl start docker
@@ -76,6 +74,8 @@ runcmd:
   - echo "[defaults]" ] > /etc/ansible/ansible.cfg
   - echo "scp_if_ssh = True" ] >> /etc/ansible/ansible.cfg
   - echo "interpreter_python=auto_silent" ] >> /etc/ansible/ansible.cfg
+  # Minikube
+  - sudo -u ${username} minikube start
 
 power_state:
   delay: "now"

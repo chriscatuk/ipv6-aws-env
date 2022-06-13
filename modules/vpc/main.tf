@@ -1,6 +1,6 @@
-########################
-#       DNS NAME       #
-########################
+# ======================
+#         VPC
+# ======================
 
 # You can remove this file if you don't want to use DNS Names
 provider "aws" {

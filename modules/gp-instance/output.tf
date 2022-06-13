@@ -1,28 +1,31 @@
-output "private_ip" {
-  value = var.enabled ? aws_instance.instance[0].private_ip : ""
+output "instance" {
+  value = aws_instance.instance
 }
 
-output "public_ip" {
-  value = var.enabled && var.public_ip ? aws_eip.ip[0].public_ip : ""
+output "private_ip" {
+  value = var.public_ipv4 ? aws_instance.instance.private_ip : null
+}
+
+output "public_ipv4" {
+  value = var.public_ipv4 ? aws_eip.ip[0].public_ip : null
 }
 
 output "id" {
-  value = var.enabled ? aws_instance.instance[0].id : ""
+  value = aws_instance.instance.id
 }
 
 output "ipv6_address" {
-  value = var.enabled ? aws_instance.instance[0].ipv6_addresses : [""]
+  value = aws_instance.instance.ipv6_addresses
 }
 
 output "hostname" {
-  value = var.enabled && var.public_ip ? var.hostname : ""
+  value = var.hostname
 }
 
 output "internal_hostname" {
-  value = var.enabled ? "internal-${var.hostname}" : ""
+  value = "internal-${var.hostname}"
 }
 
-
 output "primary_network_interface_id" {
-  value = var.enabled ? aws_instance.instance[0].primary_network_interface_id : ""
+  value = aws_instance.instance.primary_network_interface_id
 }
