@@ -30,7 +30,7 @@ runcmd:
   - docker_dir=$${git_dir}/docker-ipsec-vpn-server
   # Hostname
   - echo '127.0.0.1 ${hostname}' | sudo tee -a /etc/hosts
-  - [sed, -i, -e, "s/HOSTNAME=.*/HOSTNAME=${hostname}/", /etc/sysconfig/network]
+  - sudo hostnamectl set-hostname ${hostname}
   # Yum settings for security updates
   - yum -y update
   - systemctl enable yum-cron
