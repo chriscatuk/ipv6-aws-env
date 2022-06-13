@@ -1,14 +1,14 @@
 output "minikube" {
-  value = module.minikube
+  value = var.deploy.minikube ? module.minikube : null
 }
 
 output "bastion" {
-  value = module.bastion
+  value = var.deploy.bastion ? module.bastion : null
 }
 
-output "ipv6only_host" {
-  value = module.ipv6only_host
-}
+# output "ipv6only_host" {
+#   value = var.deploy.ipv6only_host ? module.ipv6only_host : null
+# }
 
 # output "vpc" {
 #   #  sensitive = true

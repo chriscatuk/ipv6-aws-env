@@ -51,20 +51,7 @@ variable "keypublic" { # keypublic line will be added to ~/.ssh/authorized_keys
   type = string
 }
 
-variable "dnsupdate_rolearn" {
-  type = string
-}
-
-variable "dnsupdate_region" {
-  type = string
-}
-
-variable "enabled" {
-  type    = bool
-  default = true
-}
-
-variable "public_ip" {
+variable "public_ipv4" {
   type        = bool
   default     = true
   description = "required because we don't use NAT in this VPC"

@@ -1,18 +1,20 @@
 module "minikube" {
   source = "./modules/gp-instance"
 
-  enabled = var.deploy.minikube
+  count = var.deploy.minikube ? 1 : 0
+  providers = {
+    aws.dnsupdate = aws.dnsupdate
+    aws           = aws
+  }
 
-  subnet_id         = module.vpc.private_subnets_ipv4only[0].id
-  sg_ids            = [module.vpc.vpc.default_security_group_id, aws_security_group.minikube.id]
-  hostname          = "${local.fullname}-minikube"
-  route53_zoneID    = var.dns.route53_zoneid
-  dnsupdate_rolearn = var.dns.dnsupdate_rolearn
-  dnsupdate_region  = var.dns.dnsupdate_region
-  instance_type     = "t3.medium"
-  template_path     = "${path.module}/templates/minikube-user_data.tpl"
+  subnet_id      = module.vpc.private_subnets_ipv4only[0].id
+  sg_ids         = [module.vpc.vpc.default_security_group_id, aws_security_group.minikube.id]
+  hostname       = "${local.fullname}-minikube"
+  route53_zoneID = var.dns.route53_zoneid
+  instance_type  = "t3.medium"
+  template_path  = "${path.module}/templates/minikube-user_data.tpl"
   template_vars = {
-    hostname = module.minikube.hostname
+    hostname = "${local.fullname}-minikube"
     keypubic = var.ssh.keypublic
     username = var.ssh.username
   }
@@ -21,6 +23,9 @@ module "minikube" {
   volume_size = 50
 
   keypublic = var.ssh.keypublic
+
+  public_ipv4 = false
+  ipv6        = false
 }
 
 

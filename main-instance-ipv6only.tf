@@ -1,18 +1,19 @@
 module "ipv6only_host" {
   source = "./modules/gp-instance"
 
-  enabled = var.deploy.ipv6only_host
+  count = var.deploy.ipv6only_host ? 1 : 0
+  providers = {
+    aws.dnsupdate = aws.dnsupdate
+    aws           = aws
+  }
 
-  subnet_id         = module.vpc.private_subnets_ipv6only[0].id
-  sg_ids            = [module.vpc.vpc.default_security_group_id, aws_security_group.ipv6only_host.id]
-  hostname          = "${local.fullname}-ipv6only"
-  route53_zoneID    = var.dns.route53_zoneid
-  dnsupdate_rolearn = var.dns.dnsupdate_rolearn
-  dnsupdate_region  = var.dns.dnsupdate_region
-  instance_type     = "t3.micro"
-  template_path     = "${path.module}/templates/bastion-user_data.tpl"
+  subnet_id      = module.vpc.private_subnets_ipv6only[0].id
+  sg_ids         = [module.vpc.vpc.default_security_group_id, aws_security_group.ipv6only_host.id]
+  hostname       = "${local.fullname}-ipv6only"
+  route53_zoneID = var.dns.route53_zoneid
+  instance_type  = "t3.micro"
   template_vars = {
-    hostname = module.ipv6only_host.hostname
+    hostname = "${local.fullname}-ipv6only"
     keypubic = var.ssh.keypublic
     username = var.ssh.username
   }
@@ -21,6 +22,9 @@ module "ipv6only_host" {
   volume_size = 50
 
   keypublic = var.ssh.keypublic
+
+  public_ipv4 = false
+  ipv6        = true
 }
 
 

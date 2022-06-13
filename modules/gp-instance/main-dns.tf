@@ -3,20 +3,12 @@
 # ==================== 
 
 # You can remove this file if you don't want to use DNS Names
-provider "aws" {
-  alias = "dnsupdate"
-  assume_role {
-    role_arn = var.dnsupdate_rolearn
-  }
-  region = var.dnsupdate_region
-}
-
 terraform {
-  required_version = ">=1.1"
+  required_version = ">=1.2"
   required_providers {
     aws = {
       source                = "hashicorp/aws"
-      version               = ">= 4.0"
+      version               = ">= 4.8"
       configuration_aliases = [aws.dnsupdate]
     }
   }
@@ -24,7 +16,7 @@ terraform {
 
 
 resource "aws_route53_record" "servername_ipv4" {
-  count    = var.enabled && var.public_ip ? 1 : 0
+  count    = var.public_ipv4 ? 1 : 0
   provider = aws.dnsupdate
   zone_id  = var.route53_zoneID
   name     = "${var.hostname}."
@@ -34,22 +26,22 @@ resource "aws_route53_record" "servername_ipv4" {
 }
 
 resource "aws_route53_record" "servername_ipv4_internal" {
-  count    = var.enabled ? 1 : 0
+  count    = aws_instance.instance.private_ip == "" ? 0 : 1
   provider = aws.dnsupdate
   zone_id  = var.route53_zoneID
   name     = "internal-${var.hostname}."
   type     = "A"
   ttl      = "60"
-  records  = [aws_instance.instance[0].private_ip]
+  records  = [aws_instance.instance.private_ip]
 }
 
 resource "aws_route53_record" "servername_ipv6" {
-  count    = var.enabled ? 1 : 0
+  count    = var.ipv6 ? 1 : 0
   provider = aws.dnsupdate
   zone_id  = var.route53_zoneID
   name     = "${var.hostname}."
   type     = "AAAA"
   ttl      = "60"
-  records  = aws_instance.instance[0].ipv6_addresses
+  records  = aws_instance.instance.ipv6_addresses
 }
 
