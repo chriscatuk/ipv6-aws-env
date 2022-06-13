@@ -1,3 +1,7 @@
+output "instance" {
+  value = var.enabled ? aws_instance.instance : null
+}
+
 output "private_ip" {
   value = var.enabled ? aws_instance.instance[0].private_ip : ""
 }

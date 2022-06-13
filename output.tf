@@ -1,5 +1,5 @@
-output "minikube_hostname" {
-  value = module.minikube.hostname
+output "minikube" {
+  value = module.minikube
 }
 
 output "vpc" {
