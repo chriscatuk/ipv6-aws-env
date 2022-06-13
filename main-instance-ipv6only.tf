@@ -1,7 +1,7 @@
 module "ipv6only" {
   source = "./modules/gp-instance"
 
-  enabled = var.deploy.minikube
+  enabled = var.deploy.ipv6only_host
 
   subnet_id         = module.vpc.private_subnets_ipv6only[0].id
   sg_ids            = [module.vpc.vpc.default_security_group_id, aws_security_group.ipv6only.id]
@@ -12,7 +12,7 @@ module "ipv6only" {
   instance_type     = "t3.micro"
   template_path     = "${path.module}/templates/bastion-user_data.tpl"
   template_vars = {
-    hostname = module.minikube.hostname
+    hostname = module.ipv6only.hostname
     keypubic = var.ssh.keypublic
     username = var.ssh.username
   }
