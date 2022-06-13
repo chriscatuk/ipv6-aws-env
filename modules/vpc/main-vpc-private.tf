@@ -32,10 +32,12 @@ output "nat_gateway_ips" {
 # =====================
 
 resource "aws_route_table" "private_subnets_ipv4only" {
+  count = length(aws_subnet.private_subnets_ipv4only)
+
   vpc_id = aws_vpc.vpc.id
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat_gateway.id
+    nat_gateway_id = aws_eip.nat_gateway[count.index].id
   }
 }
 
@@ -43,6 +45,6 @@ resource "aws_route_table_association" "private_subnets_ipv4only" {
   count = length(aws_subnet.private_subnets_ipv4only)
 
   subnet_id      = aws_subnet.private_subnets_ipv4only[count.index].id
-  route_table_id = aws_route_table.private_subnets_ipv4only.id
+  route_table_id = aws_route_table.private_subnets_ipv4only[count.index].id
 }
 

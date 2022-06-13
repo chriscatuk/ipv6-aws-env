@@ -74,6 +74,8 @@ runcmd:
   - echo "[defaults]" ] > /etc/ansible/ansible.cfg
   - echo "scp_if_ssh = True" ] >> /etc/ansible/ansible.cfg
   - echo "interpreter_python=auto_silent" ] >> /etc/ansible/ansible.cfg
+  # Minikube
+  - minikube start
 
 power_state:
   delay: "now"
