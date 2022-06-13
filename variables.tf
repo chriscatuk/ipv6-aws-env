@@ -47,11 +47,13 @@ variable "deploy" {
     minikube      = bool
     bastion       = bool
     ipv6only_host = bool
+    ipv4only_host = bool
   })
   default = {
     minikube      = false
     bastion       = true
     ipv6only_host = false
+    ipv4only_host = false
   }
 }
 
