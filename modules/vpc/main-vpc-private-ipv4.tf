@@ -2,7 +2,7 @@
 #     NAT GATEWAY   
 # =====================
 resource "aws_eip" "nat_gateway" {
-  count = length(aws_subnet.private_subnets_ipv4only)
+  count = length(aws_subnet.public_subnets)
 
   vpc = true
 
@@ -12,10 +12,10 @@ resource "aws_eip" "nat_gateway" {
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
-  count = length(aws_subnet.private_subnets_ipv4only)
+  count = length(aws_subnet.public_subnets)
 
   allocation_id = aws_eip.nat_gateway[count.index].id
-  subnet_id     = aws_subnet.private_subnets_ipv4only[count.index].id
+  subnet_id     = aws_subnet.public_subnets[count.index].id
 
   tags = {
     Name = "${var.vpc_name}-${count.index}"
