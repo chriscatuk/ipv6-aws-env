@@ -27,7 +27,7 @@ cidrs = {
   secondary = "10.35.128.0/22"
 }
 
-number_of_az = 3
+number_of_az = 2
 tags = {
   deployment  = "terraform"
   environment = "dev"
