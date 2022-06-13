@@ -54,7 +54,7 @@ resource "aws_subnet" "public_subnets" {
   enable_resource_name_dns_a_record_on_launch    = true
 
   tags = {
-    Name = "${var.vpc_name}-public"
+    Name = "${var.vpc_name}-public-${count.index}"
   }
 }
 
@@ -71,7 +71,7 @@ resource "aws_subnet" "private_subnets_ipv4only" {
   enable_resource_name_dns_a_record_on_launch    = true
 
   tags = {
-    Name = "${var.vpc_name}-private-ipv4"
+    Name = "${var.vpc_name}-private-ipv4-${count.index}"
   }
 }
 
@@ -92,7 +92,7 @@ resource "aws_subnet" "private_subnets_ipv6only" {
   enable_dns64                                   = true
 
   tags = {
-    Name = "${var.vpc_name}-private-ipv6"
+    Name = "${var.vpc_name}-private-ipv6-${count.index}"
   }
 
 }
