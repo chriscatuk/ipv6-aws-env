@@ -9,7 +9,7 @@ module "bastion" {
   route53_zoneID    = var.dns.route53_zoneid
   dnsupdate_rolearn = var.dns.dnsupdate_rolearn
   dnsupdate_region  = var.dns.dnsupdate_region
-  instance_type     = "t3.medium"
+  instance_type     = "t3.micro"
   template_path     = "${path.module}/templates/bastion-user_data.tpl"
   template_vars = {
     hostname = module.bastion.hostname
