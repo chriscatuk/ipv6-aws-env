@@ -17,7 +17,7 @@ regions = {
 }
 
 deploy = {
-  minikube      = false
+  minikube      = true
   bastion       = true
   ipv4only_host = true
   ipv6only_host = true
