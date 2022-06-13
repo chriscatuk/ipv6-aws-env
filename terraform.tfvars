@@ -18,9 +18,10 @@ regions = {
 
 deploy = {
   minikube      = true
+  minikube6     = true
   bastion       = true
-  ipv4only_host = true
-  ipv6only_host = true
+  ipv4only_host = false
+  ipv6only_host = false
 }
 
 #Subnet of the VPC (will be divided in 3 Availability Zones)
