@@ -27,7 +27,7 @@ variable "instance_type" {
 
 variable "template_path" {
   type    = string
-  default = ""
+  default = null
 }
 
 variable "template_vars" {
