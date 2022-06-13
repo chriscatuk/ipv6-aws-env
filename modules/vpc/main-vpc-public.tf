@@ -10,6 +10,35 @@ resource "aws_internet_gateway" "gw" {
 }
 
 # =====================
+#     NAT GATEWAY   
+# =====================
+# used by both IPv4 and IPv6 private subnets
+resource "aws_eip" "nat_gateway" {
+  count = length(aws_subnet.public_subnets)
+
+  vpc = true
+
+  tags = {
+    Name = "${var.vpc_name}-${count.index}"
+  }
+}
+
+resource "aws_nat_gateway" "nat_gateway" {
+  count = length(aws_subnet.public_subnets)
+
+  allocation_id = aws_eip.nat_gateway[count.index].id
+  subnet_id     = aws_subnet.public_subnets[count.index].id
+
+  tags = {
+    Name = "${var.vpc_name}-${count.index}"
+  }
+}
+
+output "nat_gateway_ips" {
+  value = aws_eip.nat_gateway[*].public_ip
+}
+
+# =====================
 #  Route Table Update  
 # =====================
 resource "aws_default_route_table" "route" {
