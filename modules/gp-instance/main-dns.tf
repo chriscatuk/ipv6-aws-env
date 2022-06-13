@@ -26,7 +26,7 @@ resource "aws_route53_record" "servername_ipv4" {
 }
 
 resource "aws_route53_record" "servername_ipv4_internal" {
-  count    = aws_instance.instance.private_ip == "" ? 0 : 1
+  count    = (var.public_ipv4 || !var.ipv6) ? 1 : 0
   provider = aws.dnsupdate
   zone_id  = var.route53_zoneID
   name     = "internal-${var.hostname}."
