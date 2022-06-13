@@ -12,7 +12,7 @@ module "ipv6only_host" {
   instance_type     = "t3.micro"
   template_path     = "${path.module}/templates/bastion-user_data.tpl"
   template_vars = {
-    hostname = module.ipv6only.hostname
+    hostname = module.ipv6only_host.hostname
     keypubic = var.ssh.keypublic
     username = var.ssh.username
   }
