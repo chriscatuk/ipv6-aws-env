@@ -24,10 +24,10 @@ packages:
 
 runcmd:
   # Clone App repo 1/2: Settings
-  - git_repo=https://github.com/chriscatuk/vpn-bastion.git
-  - git_dir=/opt/github/vpn-bastion
-  - git_branch=master
-  - docker_dir=$${git_dir}/docker-ipsec-vpn-server
+  - git_repo=https://github.com/chriscatuk/ipv6-aws-env.git
+  - git_dir=/opt/github/ipv6-aws-env
+  - git_branch=main
+  - charts_dir=$${git_dir}/templates/kub-charts
   # Hostname
   - echo '127.0.0.1 ${hostname}' | sudo tee -a /etc/hosts
   - sudo hostnamectl set-hostname ${hostname}
@@ -49,8 +49,8 @@ runcmd:
   - systemctl start docker
   - sudo usermod -aG docker ${username} && newgrp docker
   # Clone App repo 2/2: Clone & Install
-  # - git clone --depth=1 --branch $${git_branch} $${git_repo} $${git_dir}
-  # - cd $${git_dir}
+  - git clone --depth=1 --branch $${git_branch} $${git_repo} $${git_dir}
+  - cd $${git_dir}
   # Terraform
   - mkdir /opt/tfenv
   - git clone --depth=1 https://github.com/tfutils/tfenv.git /opt/tfenv

@@ -17,8 +17,8 @@ regions = {
 }
 
 deploy = {
-  minikube      = false
-  minikube6     = true
+  minikube      = true
+  minikube6     = false # minikube currently doesn’t support IPv6 https://minikube.sigs.k8s.io/docs/faq/
   bastion       = true
   ipv4only_host = false
   ipv6only_host = false
