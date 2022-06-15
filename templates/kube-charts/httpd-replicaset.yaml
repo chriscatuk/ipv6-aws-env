@@ -16,6 +16,7 @@ spec:
         app: apache_webserver
     spec:
       containers:
-        - image: httpd:latest # using the official apache image from docker hub, along with a tag
+        - name: webapp
+          image: httpd:latest # using the official apache image from docker hub, along with a tag
           ports: # this bit is purely for informational purposes only and can be omitted.
             - containerPort: 80 # what port the container will be listening on
