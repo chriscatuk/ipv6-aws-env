@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: ReplicaSet-httpd # the name displayed in the first column of 'kubectl get pods'
+  name: webapp # the name displayed in the first column of 'kubectl get pods'
   labels:
     app: apache_webserver # this tag is added to help this object to link to the service object.
     version: "1"
@@ -10,15 +10,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-    app: apache_webserver
-    version: "1"
+      app: apache_webserver
+      version: "1"
   template:
     metadata:
       labels:
-        tier: frontend
+        app: apache_webserver
+        version: "1"
     spec:
       containers:
-        - name: set-httpd # name of the container that will reside in the pod
-          image: httpd:latest # using the official apache image from docker hub, along with a tag
+        - image: httpd:latest # using the official apache image from docker hub, along with a tag
           ports: # this bit is purely for informational purposes only and can be omitted.
             - containerPort: 80 # what port the container will be listening on
