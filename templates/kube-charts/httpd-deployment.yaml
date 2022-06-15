@@ -7,6 +7,7 @@ metadata:
     app: apache_webserver # this tag is added to help this object to link to the service object.
 spec:
   replicas: 2
+  minReadySeconds: 30 # wait before considering pods ready, check with kubectl rollout status
   selector:
     matchLabels:
       app: apache_webserver
@@ -17,6 +18,7 @@ spec:
     spec:
       containers:
         - name: webapp
-          image: httpd:latest # using the official apache image from docker hub, along with a tag
+          #image: httpd:latest
+          image: httpd:2.2
           ports: # this bit is purely for informational purposes only and can be omitted.
             - containerPort: 80 # what port the container will be listening on
