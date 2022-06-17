@@ -57,12 +57,14 @@ runcmd:
   - ln -s /opt/tfenv/bin/* /usr/local/bin
   - tfenv install latest
   - tfenv use latest
-  # KUBECTL & HELM
-  - mkdir /opt/kubectl
-  - curl --fail --silent --show-error -o /opt/kubectl/kubectl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-  - cp /opt/kubectl/kubectl /usr/local/bin/
-  - rm -rf /opt/kubectl
-  - chmod a+x /usr/local/bin/kubectl
+  # KUBECTL & HELM & K9S
+  - mkdir -p /opt/install/k9s
+  - curl --fail --silent --show-error -o /opt/install/kubectl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  - curl --fail --silent --show-error -o /opt/install/k9s.tar.gz -LO "https://github.com/derailed/k9s/releases/download/v0.25.18/k9s_Linux_x86_64.tar.gz"
+  - tar xzf /opt/install/k9s.tar.gz --directory=/opt/install/k9s
+  - cp /opt/install/kubectl /opt/install/k9s/k9s /usr/local/bin/
+  - rm -rf /opt/install
+  - chmod a+x /usr/local/bin/kubectl /usr/local/bin/k9s
   - export VERIFY_CHECKSUM=false && curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   # Minikube
   - mkdir /opt/minikube
