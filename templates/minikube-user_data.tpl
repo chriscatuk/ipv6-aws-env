@@ -21,6 +21,7 @@ packages:
   - curl
   - stress
   - yum-cron
+  - git
 
 runcmd:
   # Clone App repo 1/2: Settings
