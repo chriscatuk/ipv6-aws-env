@@ -79,6 +79,10 @@ runcmd:
   - echo "interpreter_python=auto_silent" ] >> /etc/ansible/ansible.cfg
   # Minikube
   - sudo -u ${username} minikube start
+  -  ## after reboot ##
+  -  ## minikube start
+  -  ## kubectl apply -f /opt/github/ipv6-aws-env/templates/kube-charts/helloworld-kubectl/
+  -  ## curl $(minikube service helloworld --url -n=helloworld)
 
 power_state:
   delay: "now"
