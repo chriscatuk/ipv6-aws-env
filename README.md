@@ -17,4 +17,13 @@ export AWS_PROFILE=training
 
 terraform init
 terraform apply  -var-file=terraform.tfvars  -var-file=terraform.safe.tfvars
+
+ssh internal-mikikube-host -j bastion
+# takes really long to install minikube, check progress with
+sudo tail -f /var/log/cloud-init-output
+
+# after reboot
+minikube start
+kubectl apply -f /opt/github/ipv6-aws-env/templates/kube-charts/helloworld/
+curl $(minikube service helloworld --url -n=helloworld)
 ```
