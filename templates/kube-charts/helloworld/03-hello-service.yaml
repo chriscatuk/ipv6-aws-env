@@ -1,5 +1,5 @@
 # to access this service:
-# curl $(minikube service helloworld --url)
+# curl $(minikube service helloworld --url -n=helloworld)
 kind: Service
 apiVersion: v1
 metadata:
@@ -11,9 +11,16 @@ spec:
     # Loadbalance traffic across Pods matching
     # which pods to be represented by this service
     app: helloworld
-  # Create an HA proxy in the cloud provider
-  # with an External IP address - *Only supported
-  # by some cloud providers*
+  # # Create an HA proxy in the cloud provider
+  # # with an External IP address - *Only supported
+  # # by some cloud providers*
+  # type: LoadBalancer
+  # ports:
+  #   # Accept traffic sent to port 80
+  #   - name: http
+  #     protocol: TCP
+  #     port: 80
+  #     targetPort: 80
   type: NodePort
   ports:
     # Accept traffic sent to port 80
